@@ -41,17 +41,17 @@ namespace Domain.Services
 
         public List<C> GetAll<C>(string key = "", string opera = "=", string value = "") where C : class
         {
-            if (Person.count == 0)
+            if (Persons.Count == 0)
                 throw new Exception("No hay datos para consultar");
             var list = new List<C>();
 
-            if (typeof(C).Name == "User")
+            if (typeof(C).Name == "Persons")
             {
-                foreach (var user in Users)
+                foreach (var persons in Persons)
                 {
-                    if (user is C userC)
+                    if (Persons is C personsC)
                     {
-                        list.Add(userC);
+                        list.Add(personsC);
                     }
                 }
                 return list;
@@ -63,16 +63,16 @@ namespace Domain.Services
                          string.IsNullOrWhiteSpace(value))
                 {
 
-                    if (typeof(User).GetProperty(key) == null)
+                    if (typeof(Person).GetProperty(key) == null)
                     {
                         throw new Exception("La propieda a consultar no existe");
                     }
-                    var keyValues = Users.Select(user =>
+                    var keyValues = Persons.Select(person =>
                     {
-                        var property = user.GetType().GetProperty(key);
+                        var property = Persons.GetType().GetProperty(key);
                         if (property != null)
                         {
-                            return property.GetValue(user);
+                            return property.GetValue(person);
                         }
                         return null; // O puedes devolver un valor predeterminado en caso de que la propiedad no exista
                     }).ToList();
@@ -87,8 +87,6 @@ namespace Domain.Services
                 }
             }
             return list;
-        
-            throw new NotImplementedException();
         }
 
         public bool Update(int id, Person entity)
