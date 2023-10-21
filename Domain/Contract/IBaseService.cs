@@ -8,10 +8,6 @@ namespace Domain.Contract
 {
     public interface IBaseService<T> where T : class
     {
-        List<C> GetAll<C>(
-            string key = "",
-            string opera = "",
-            string value = "") where C : class;
         int Create(T entity);
 
         bool Update(int id, T entity);
@@ -20,6 +16,9 @@ namespace Domain.Contract
 
         T? Get(int id);
 
-        
+        List<C> GetAll<C>(
+            string key = "", 
+            string opera="",
+            string value = "") where C : class;
     }
 }
