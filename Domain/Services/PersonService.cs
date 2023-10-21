@@ -10,6 +10,19 @@ namespace Domain.Services
 {
     internal class PersonService : IPersonService
     {
+        public List<Person> Persons;
+
+        public PersonService()
+        {
+            Persons = new List<Person>();
+        }
+
+        public PersonService(List<Person> persons)
+        {
+            Persons = persons;
+        }
+
+
         public int Create(Person entity)
         {
             throw new NotImplementedException();
@@ -20,9 +33,11 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
-        public Person Get(int id)
+        public Person? Get(int id)
         {
-            throw new NotImplementedException();
+            if (id == 0 || Persons.Count == 0) return null;
+            var person = Persons.FirstOrDefault(x => x.Id == id);
+            return person;
         }
 
         public List<C> GetAll<C>(string key = "", string opera = "=", string value = "") where C : class
