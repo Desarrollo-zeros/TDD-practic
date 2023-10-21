@@ -14,7 +14,7 @@ namespace Test.Domain
     [TestFixture]
     public class PersonTest
     {
-        private IPersonService _personService;
+        private IPersonService? _personService;
 
         [SetUp]
         public void SetUp()
