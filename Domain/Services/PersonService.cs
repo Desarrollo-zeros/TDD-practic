@@ -58,11 +58,11 @@ namespace Domain.Services
                 throw new Exception("No hay datos para consultar");
             var list = new List<C>();
 
-            if (typeof(C).Name == "Persons")
+            if (typeof(C).Name == "Person")
             {
-                foreach (var persons in Persons)
+                foreach (var person in Persons)
                 {
-                    if (Persons is C personsC)
+                    if (person is C personsC)
                     {
                         list.Add(personsC);
                     }
@@ -82,7 +82,7 @@ namespace Domain.Services
                     }
                     var keyValues = Persons.Select(person =>
                     {
-                        var property = Persons.GetType().GetProperty(key);
+                        var property = person.GetType().GetProperty(key);
                         if (property != null)
                         {
                             return property.GetValue(person);
