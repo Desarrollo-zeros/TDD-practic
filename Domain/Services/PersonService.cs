@@ -10,7 +10,7 @@ namespace Domain.Services
 {
     public class PersonService : IPersonService
     {
-        public List<Person> Persons;
+        public List<Person>     Persons;
 
         public PersonService()
         {
@@ -43,7 +43,10 @@ namespace Domain.Services
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            if (id == 0 || Persons.Count == 0) return false;
+            var person = Persons.FirstOrDefault(x => x.Id == id);
+            if (person == null) return false;
+            return Persons.Remove(person);
         }
 
         public Person? Get(int id)
