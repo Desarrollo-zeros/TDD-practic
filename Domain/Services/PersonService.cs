@@ -36,8 +36,7 @@ namespace Domain.Services
         public Person? Get(int id)
         {
             if (id == 0 || Persons.Count == 0) return null;
-            var person = Persons.FirstOrDefault(x => x.Id == id);
-            return person;
+            return Persons.FirstOrDefault(x => x.Id == id);
         }
 
         public List<C> GetAll<C>(string key = "", string opera = "=", string value = "") where C : class
