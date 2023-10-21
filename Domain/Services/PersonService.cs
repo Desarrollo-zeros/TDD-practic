@@ -53,8 +53,6 @@ namespace Domain.Services
             if (index == -1) return false;
             Persons[index].FirstName = entity.FirstName;
             Persons[index].LastName = entity.LastName;
-            Persons[index].Document = entity.Document;
-            Persons[index].DocumentType = entity.DocumentType;
             Persons[index].Update();
             return true;
         }
