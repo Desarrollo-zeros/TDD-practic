@@ -10,7 +10,7 @@ namespace Domain.Services
 {
     public class PersonService : IPersonService
     {
-        public List<Person>     Persons;
+        public List<Person> Persons;
 
         public PersonService()
         {
