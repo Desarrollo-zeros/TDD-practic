@@ -22,10 +22,23 @@ namespace Domain.Services
             Persons = persons;
         }
 
+        private int GetLastId()
+        {
+            return (Persons.LastOrDefault()?.Id ?? 0) + 1;
+        }
 
         public int Create(Person entity)
         {
-            throw new NotImplementedException();
+            if (entity == null ||
+                string.IsNullOrWhiteSpace(entity.Document)) return 0;
+            if (!Persons.Any(x => x.Document == entity.Document))
+            {
+                entity.Id = GetLastId();
+                entity.Create();
+                Persons.Add(entity);
+                return entity.Id;
+            }
+            return 0;
         }
 
         public bool Delete(int id)
