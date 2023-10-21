@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Test.Domain
 {
+<<<<<<< HEAD
     [TestFixture]
     public class PersonTest
     {
@@ -55,10 +56,38 @@ namespace Test.Domain
             _personService = new PersonService();
             var result = _personService.Update(0, null);
             Assert.IsFalse(result);
+=======
+    public class PersonTest
+    {
+
+        private IPersonService _personService;
+
+        [SetUp]
+        public void SetUp()
+        {
+
+        }
+
+        [Test]
+        public void CreatePersonFail()
+        {
+            _personService = new PersonService();
+            int result = _personService.Create(null);
+            Assert.AreEqual(0, result);
+        }
+
+        [Test]
+        public void CreatePersonFail2()
+        {
+            _personService = new PersonService();
+            int result = _personService.Create(new Person { });
+            Assert.AreEqual(0, result);
+>>>>>>> d1755a12498bb651fff886c00d2981a65e088cd9
         }
 
 
         [Test]
+<<<<<<< HEAD
         public void UpdateUserFail5()
         {
             _personService = new PersonService();
@@ -182,5 +211,22 @@ namespace Test.Domain
             Assert.IsNotNull(resultUser?.UpdatedAt);
         }
 
+=======
+        public void CreateUserSuccess()
+        {
+            _personService = new PersonService();
+            var person = new Person()
+            {
+                FirstName = "Oljer",
+                LastName = "Murgas",
+                SecondName= null,
+                SecondLastName="Castañeda",
+                Document ="77177",
+                DocumentType= DocumentType.CC,
+            };
+            var result = _personService.Create(person);
+            Assert.AreEqual(1, result);
+        }
+>>>>>>> d1755a12498bb651fff886c00d2981a65e088cd9
     }
 }
