@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    internal class PersonService : IPersonService
+    public class PersonService : IPersonService
     {
         public List<Person> Persons;
 
@@ -47,7 +47,16 @@ namespace Domain.Services
 
         public bool Update(int id, Person entity)
         {
-            throw new NotImplementedException();
+            if (id == 0 || entity == null) return false;
+            if (entity.UserId == 0) return false;
+            var index = Persons.FindIndex(x => x.Id == id);
+            if (index == -1) return false;
+            Persons[index].FirstName = entity.FirstName;
+            Persons[index].LastName = entity.LastName;
+            Persons[index].Document = entity.Document;
+            Persons[index].DocumentType = entity.DocumentType;
+            Persons[index].Update();
+            return true;
         }
     }
 }
