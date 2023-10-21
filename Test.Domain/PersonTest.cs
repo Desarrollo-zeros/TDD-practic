@@ -37,6 +37,7 @@ namespace Test.Domain
             Assert.AreEqual(0, result);
         }
 
+
         [Test]
         public void CreateUserSuccess()
         {
