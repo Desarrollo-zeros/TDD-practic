@@ -1,4 +1,5 @@
-﻿using Domain.Contract;
+﻿using AutoFixture;
+using Domain.Contract;
 using Domain.Entity;
 using Domain.Services;
 using NUnit.Framework;
@@ -63,17 +64,37 @@ namespace Test.Domain
         [Test]
         public void CreatePersonFail()
         {
+            //Arrange
             _personService = new PersonService();
-            int result = _personService.Create(null);
-            Assert.AreEqual(0, result);
+
+            //Act
+            var ex = Assert.Throws<Exception>(
+                () => _personService.GetAll<Person>()
+            );
+
+            //Assert
+            Assert.
+                That(ex.Message,
+                Is.EqualTo("No hay datos para consultar"));
         }
 
         [Test]
-        public void CreatePersonFail2()
+        public void GetAllDataFilterKeyFailtWithData()
         {
-            _personService = new PersonService();
-            int result = _personService.Create(new Person { });
-            Assert.AreEqual(0, result);
+            //Arrange
+            var fixture = new Fixture();
+            var listPerson = fixture.CreateMany<Person>(10);
+            _personService = new PersonService(listPerson.ToList());
+
+            //Act
+            var ex = Assert.Throws<Exception>(
+               () => _personService.GetAll<string>("name")
+           );
+
+            //Assert
+            Assert.
+                That(ex.Message,
+                Is.EqualTo("La propieda a consultar no existe"));
         }
 
         public void UpdateUserSuccess()
@@ -274,6 +295,60 @@ namespace Test.Domain
             var result = _personService.Delete(2);
             Assert.IsNotNull(result);
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void GetAllDataFilterFailWithNotData()
+        {
+            //Arrange
+            _personService = new PersonService();
+
+            //Act
+            var ex = Assert.Throws<Exception>(
+                () => _personService.GetAll<Person>()
+            );
+
+            //Assert
+            Assert.
+                That(ex.Message,
+                Is.EqualTo("No hay datos para consultar"));
+        }
+
+        
+        [Test]
+        public void GetAllDataFilterKeySuccessWithData()
+        {
+            //Arrange
+            var fixture = new Fixture();
+            var listPerson = fixture.CreateMany<Person>(10);
+            _personService = new PersonService(listPerson.ToList());
+
+            //Act
+            var person = _personService.GetAll<string>("Document");
+
+            //Assert
+            Assert.IsNotNull(person);
+            Assert.AreEqual(person.Count, 10);
+            Assert.AreEqual(person.FirstOrDefault(),
+                listPerson.FirstOrDefault()?.Document);
+            Assert.AreEqual(person.LastOrDefault(),
+               listPerson.LastOrDefault()?.Document);
+        }
+
+        [Test]
+        public void GetAllDataFilterSuccessWithData()
+        {
+            //Arrange
+            var fixture = new Fixture();
+            var listPerson = fixture.CreateMany<Person>(10);
+            _personService = new PersonService(listPerson.ToList());
+
+            //Act
+            var person = _personService.GetAll<Person>();
+
+            //Assert
+            Assert.IsNotNull(person);
+            Assert.AreEqual(person.Count, 10);
         }
 
 
