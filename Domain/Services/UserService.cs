@@ -55,10 +55,7 @@ namespace Domain.Services
             var usr = Get(id);
             if (usr == null) return false;
             return Users.Remove(usr);
-
-
         }
-
         public User? Get(int id)
         {
             if (id == 0 || Users.Count == 0) return null;
