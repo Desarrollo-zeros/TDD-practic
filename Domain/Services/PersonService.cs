@@ -54,7 +54,52 @@ namespace Domain.Services
 
         public List<C> GetAll<C>(string key = "", string opera = "=", string value = "") where C : class
         {
-            throw new NotImplementedException();
+            if (Persons.Count == 0)
+                throw new Exception("No hay datos para consultar");
+            var list = new List<C>();
+
+            if (typeof(C).Name == "Persons")
+            {
+                foreach (var persons in Persons)
+                {
+                    if (Persons is C personsC)
+                    {
+                        list.Add(personsC);
+                    }
+                }
+                return list;
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(key)
+                         && string.IsNullOrWhiteSpace(opera) &&
+                         string.IsNullOrWhiteSpace(value))
+                {
+
+                    if (typeof(Person).GetProperty(key) == null)
+                    {
+                        throw new Exception("La propieda a consultar no existe");
+                    }
+                    var keyValues = Persons.Select(person =>
+                    {
+                        var property = Persons.GetType().GetProperty(key);
+                        if (property != null)
+                        {
+                            return property.GetValue(person);
+                        }
+                        return null; // O puedes devolver un valor predeterminado en caso de que la propiedad no exista
+                    }).ToList();
+
+                    foreach (var keys in keyValues)
+                    {
+                        if (keys is C keyC)
+                        {
+                            list.Add(keyC);
+                        }
+                    }
+                }
+            }
+            return list;
         }
 
         public bool Update(int id, Person entity)

@@ -46,15 +46,6 @@ namespace Domain.Services
             var user = Users.FirstOrDefault(x => x.Id == id);
             if (user == null) return false;
             return Users.Remove(user);
-
-            var index = Users.FindIndex(x => x.Id == id);   
-            if (index == -1) return false;
-            Users.RemoveAt(index);
-            return true;
-
-            var usr = Get(id);
-            if (usr == null) return false;
-            return Users.Remove(usr);
         }
         public User? Get(int id)
         {
