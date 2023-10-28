@@ -23,7 +23,7 @@ namespace Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string connectionString = "Server=localhost;Database=back;User=root;Password=toor;";
+                string connectionString = "Server=192.168.1.9;Database=back;User=root;Password=toor;";
                 optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 27)));
             }
             base.OnConfiguring(optionsBuilder);
@@ -32,8 +32,7 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
-            //usuerio decir que username y email son unicos
+           //usuerio decir que username y email son unicos
             modelBuilder.Entity<User>()
                 .HasIndex(user => user.UserName)
                 .IsUnique();
@@ -50,6 +49,5 @@ namespace Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
-       
     }
 }
