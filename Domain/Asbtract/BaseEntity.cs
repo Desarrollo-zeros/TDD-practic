@@ -1,11 +1,14 @@
 ﻿using Domain.Contract;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Asbtract
 {
-    public abstract class BaseEntity<T> : Audit, IEntity<T>
+    public abstract class BaseEntity<T> : BaseEntity, IEntity<T>
     {
+        [Key]
         public virtual T Id { get; set; }
     }
-
-
+    public abstract class BaseEntity : Audit
+    {
+    }
 }

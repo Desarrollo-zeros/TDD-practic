@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  # Servicio de MySQL
+  mysql:
+    image: mysql:8.0.27
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: back
+      MYSQL_USER: zeros
+      MYSQL_PASSWORD: toor
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      
+      
+volumes:
+  mysql-data:
