@@ -43,6 +43,9 @@ namespace Domain.Entity
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
 
+        [Column(TypeName = "bit")]
+        public bool State { set; get; }
+
         public string GetFullName() 
             => $"{FirstName} {SecondName} {LastName} {SecondLastName}";
 

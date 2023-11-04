@@ -10,5 +10,7 @@ namespace Domain.Asbtract
     }
     public abstract class BaseEntity : Audit
     {
+        [Key]
+        public virtual object Id { get; set; }
     }
 }

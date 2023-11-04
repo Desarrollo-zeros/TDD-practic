@@ -21,11 +21,6 @@ namespace Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                string connectionString = "Server=192.168.1.9;Database=back;User=root;Password=toor;";
-                optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 27)));
-            }
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -49,5 +44,9 @@ namespace Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+           return await base.SaveChangesAsync();
+        }
     }
 }

@@ -11,7 +11,7 @@ services:
       MYSQL_USER: zeros
       MYSQL_PASSWORD: toor
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
       

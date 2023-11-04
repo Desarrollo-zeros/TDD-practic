@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231104140411_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231104152824_Add-Column-State")]
+    partial class AddColumnState
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("SecondName")
                         .HasColumnType("varchar(255)");
+
+                    b.Property<ulong>("State")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");

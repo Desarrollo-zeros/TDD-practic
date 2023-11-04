@@ -11,32 +11,17 @@ namespace Domain.Contract
     public interface IRepository<T> where T : BaseEntity, IEntity
     {
         T Get(int id);
-        bool Add(T entity);
-        bool Delete(int id);
-        bool Update(T entity);
-        int AddRange(IEnumerable<T> entities);
-        int DeleteRange(List<int> ids);
+        void Add(T entity);
+        void Delete(T entity);
+        void Update(T entity);
+        void AddRange(IEnumerable<T> entities);
+        void DeleteRange(IEnumerable<T> entities);
         IQueryable<T> GetAll();
         IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
-        IEnumerable<T> FindBy(
-           Expression<Func<T, bool>> filter = null,
-           Func<IQueryable<T>,
-           IOrderedQueryable<T>> orderBy = null,
-           string includeProperties = ""
-        );
         Task<T> GetAsync(int id);
-        Task<bool> AddAsync(T entity);
-        Task<bool> DeleteAsync(int id);
-        Task<bool> UpdateAsync(T entity);
-        Task<int> AddRangeAsync(IEnumerable<T> entities);
-        Task<int> DeleteRangeAsync(List<int> ids);
-        Task<IQueryable<T>> GetAllAsync();
+        Task AddAsync(T entity);
+        Task AddRangeAsync(IEnumerable<T> entities);
         Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);
-        Task<IEnumerable<T>> FindByAsync(
-           Expression<Func<T, bool>> filter = null,
-           Func<IQueryable<T>,
-           IOrderedQueryable<T>> orderBy = null,
-           string includeProperties = ""
-        );
+        
     }
 }
