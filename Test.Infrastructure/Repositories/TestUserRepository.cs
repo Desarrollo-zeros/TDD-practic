@@ -32,6 +32,23 @@ namespace Test.Infrastructure.Repositories
             var fixture = new Fixture();
             var users = fixture.CreateMany<User>(2);
             _userRepository.AddRange(users);
+            ////select id from users;
+            //_userRepository.GetAll().Select(x => x.Id).ToList();
+            ////select * from users where id = 1;
+            //_userRepository.GetAll().Where(x => x.Id == 1).ToList();
+
+            ////update users set username = a where id = 1
+            //_userRepository.Update(new User
+            //{
+            //    Id = 1,
+            //    UserName = "a"
+            //});
+            ////insert into users(username) values('a');
+            //_userRepository.Add(new User
+            //{
+            //    UserName = "a"
+            //});
+
             Assert.AreEqual( 2, _unitOfWork.SaveChange());
         }
 
